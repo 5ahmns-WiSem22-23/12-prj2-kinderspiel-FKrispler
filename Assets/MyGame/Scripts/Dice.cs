@@ -3,15 +3,16 @@ using UnityEngine;
 public class Dice : MonoBehaviour
 {
     public GameObject[] diceFaces;
-    public Vector2 spawnPosition;
+    public Transform[] spawnPoints;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            int randomNumber = Random.Range(1, 7);
-            GameObject face = diceFaces[randomNumber - 1];
-            Instantiate(face, spawnPosition, Quaternion.identity);
+            int randomNumber = Random.Range(0, diceFaces.Length);
+            Vector3 spawnPos = spawnPoints[randomNumber].position;
+            spawnPos.z = 0;
+            Instantiate(diceFaces[randomNumber], spawnPos, Quaternion.identity);
         }
     }
 }
