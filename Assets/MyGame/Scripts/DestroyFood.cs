@@ -5,12 +5,18 @@ using UnityEngine;
 public class DestroyFood : MonoBehaviour
 {
     public bool spoonTouch = false;
+    public GameObject vischlLize;
+
+    //private void Start()
+    //{
+      //  vischlLize.SetActive(true);
+    //}
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Spoon"))
         {
             spoonTouch = true;
-
+            vischlLize.SetActive(false);
         }
 
 
@@ -21,15 +27,16 @@ public class DestroyFood : MonoBehaviour
             {
                 Destroy(gameObject);
                 spoonTouch = false;
+                vischlLize.SetActive(true);
             }
 
             if (collision.collider.CompareTag("Plate"))
             {
                 Destroy(gameObject);
                 spoonTouch = false;
+                vischlLize.SetActive(true);
             }
         }
 
     }
-
 }
