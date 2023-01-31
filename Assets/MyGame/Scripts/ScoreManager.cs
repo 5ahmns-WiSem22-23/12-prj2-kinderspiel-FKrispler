@@ -10,6 +10,8 @@ public class ScoreManager : MonoBehaviour
     private int mouthPoints = 0;
     public Text mouthText;
     public Text scoreText;
+    public GameObject winText;
+    public GameObject loseText;
     public GameObject restartButton;
     public GameObject spoonOBJ;
 
@@ -36,6 +38,16 @@ public class ScoreManager : MonoBehaviour
         {
             spoonOBJ.SetActive(false);
             restartButton.SetActive(true);
+
+            if (score > mouthPoints)
+            {
+                loseText.SetActive(true);
+            }
+
+            if (score < mouthPoints)
+            {
+                winText.SetActive(true);
+            }
         }
     }
 }
