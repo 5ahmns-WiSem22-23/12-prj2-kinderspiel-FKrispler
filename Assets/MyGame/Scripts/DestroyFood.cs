@@ -6,11 +6,9 @@ public class DestroyFood : MonoBehaviour
 {
     public bool spoonTouch = false;
     public GameObject vischlLize;
+    public GameObject floorOBJ;
+    public GameObject mouthOBJ;
 
-    //private void Start()
-    //{
-      //  vischlLize.SetActive(true);
-    //}
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Spoon"))
@@ -28,6 +26,13 @@ public class DestroyFood : MonoBehaviour
                 Destroy(gameObject);
                 spoonTouch = false;
                 vischlLize.SetActive(true);
+                mouthOBJ.SetActive(true);
+                if (mouthOBJ.activeSelf)
+                {
+                    ScoreManager scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+                    scoreManager.MouthScore(1);
+                    mouthOBJ.SetActive(false);
+                }
             }
 
             if (collision.collider.CompareTag("Plate"))
@@ -35,6 +40,13 @@ public class DestroyFood : MonoBehaviour
                 Destroy(gameObject);
                 spoonTouch = false;
                 vischlLize.SetActive(true);
+                floorOBJ.SetActive(true);
+                if (floorOBJ.activeSelf)
+                {
+                    ScoreManager scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+                    scoreManager.AddScore(1);
+                    floorOBJ.SetActive(false);
+                }
             }
         }
 
