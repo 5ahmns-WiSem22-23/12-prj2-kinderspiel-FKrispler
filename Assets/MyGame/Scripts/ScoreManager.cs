@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -10,12 +11,7 @@ public class ScoreManager : MonoBehaviour
     public Text mouthText;
     public Text scoreText;
     public GameObject restartButton;
-
-    private void Start()
-    {
-        Button restartButton = gameObject.AddComponent<Button>();
-        restartButton.onClick.AddListener(OnClick);
-    }
+    public GameObject spoonOBJ;
 
     public void AddScore(int value)
     {
@@ -29,17 +25,16 @@ public class ScoreManager : MonoBehaviour
         mouthText.text = "Feeded: " + mouthPoints;
     }
 
-    public void OnClick()
+    public void ResetTheGame()
     {
-        mouthPoints = 0;
-        score = 0;
-        restartButton.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Update()
     {
         if (score + mouthPoints >= 10)
         {
+            spoonOBJ.SetActive(false);
             restartButton.SetActive(true);
         }
     }
